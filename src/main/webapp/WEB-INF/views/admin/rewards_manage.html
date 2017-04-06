@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title> - 奖惩管理</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="../../common/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../common/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <!--自定义css-->
+	<link href="../../common/css/admin/rewardsmanager.css" rel="stylesheet">
+	
+    <!-- Data Tables -->
+    <link href="../../common/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <!-- sweetalert  -->
+ 	<link href="../../common/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="../../common/css/animate.css" rel="stylesheet">
+    <link href="../../common/css/style.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+	<!--添加奖励惩罚-->
+	<div class="modal inmodal" id="add_rewardModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                	<span style="font-size: 24px;" id="span1"></span>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+                    </button>
+                    
+                    </div>
+                    <div class="modal-body">
+                    	<form class="form-horizontal" action="" method="post">
+                    	 <div class="form-group">
+                            <label class="col-sm-3 control-label">名称：</label>
+                            <div class="col-sm-8">
+                                <input type="text" required="" aria-required="true" placeholder="名称" class="form-control"> 
+                            </div>
+                        </div>
+                    	<div class="form-group">
+                            <label class="col-sm-3 control-label">等级：</label>
+                            <div class="col-sm-8">
+                                <input type="text" required="" aria-required="true" placeholder="等级" class="form-control"> 
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">类型：</label>
+                            <div class="col-sm-8">
+                                <input type="text" required="" aria-required="true" placeholder="类型" class="form-control">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">人员：</label>
+                            <div class="col-sm-8">
+                                <input type="text" equired="" aria-required="true" placeholder="人员" class="form-control"> 
+                            </div>
+                        </div>
+			            <div class="modal-footer">
+	                        <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+	                        <button type="submit" class="btn btn-primary">保存</button>
+               		    </div>
+				       </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!--编辑科研项目-->
+	<div class="modal inmodal" id="edit_rewardsModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                	<span style="font-size: 24px;">编辑信息</span>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+                    </button>
+                    
+                    </div>
+                    <div class="modal-body">
+                    	<form class="form-horizontal" action="" method="post">
+                    	 <div class="form-group">
+                            <label class="col-sm-3 control-label">名称：</label>
+                            <div class="col-sm-8">
+                                <input type="text" required="" aria-required="true" placeholder="名称" class="form-control"> 
+                            </div>
+                        </div>
+                    	<div class="form-group">
+                            <label class="col-sm-3 control-label">等级：</label>
+                            <div class="col-sm-8">
+                                <input type="text" required="" aria-required="true" placeholder="等级" class="form-control"> 
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">类型：</label>
+                            <div class="col-sm-8">
+                                <input type="text" required="" aria-required="true" placeholder="类型" class="form-control">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">人员：</label>
+                            <div class="col-sm-8">
+                                <input type="text" equired="" aria-required="true" placeholder="人员" class="form-control"> 
+                            </div>
+                        </div>
+			            <div class="modal-footer">
+	                        <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+	                        <button type="submit" class="btn btn-primary">保存</button>
+               		    </div>
+				       </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+	
+	<div class="btn-group btns">
+	  <button type="button" class="btn btn-primary">添加</button>
+	  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	    <span class="caret"></span>
+	    <span class="sr-only"></span>
+	  </button>
+	  <ul class="dropdown-menu btn-primary">
+	    <li><a href="#" onclick="addRewardsInfo('奖励')" data-toggle="modal" data-target="#add_rewardModal">奖励</a></li>
+	     <li role="separator" class="divider"></li>
+	    <li><a href="#" onclick="addRewardsInfo('惩罚')" data-toggle="modal" data-target="#add_rewardModal">惩罚</a></li>
+	  </ul>
+	</div>
+   <button type="button" id="del_rewardsbtn" class="btn btn-danger btns del_ManyrewardsById" disabled="disabled">
+   		     批量删除
+    </button>
+    
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>信息列表</h5>
+                   
+                </div>
+                <div class="ibox-content">
+
+                    <table class="table table-striped table-bordered table-hover dataTables-projectmanager">
+                        <thead>
+                        <tr>
+                        	<th>
+                        		<div class="checkbox i-checks" >
+                                       <label><input type="checkbox" value="" id="delRewards" ></label>
+                            	</div>
+                        	</th>
+                        	<th>名称</th>
+                            <th>等级</th>
+                            <th>类型</th>
+                            <th>时间</th>
+                            <th>人员</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="gradeX">
+                        	 <td><input type="checkbox" value=""  onclick="chooseRewards()"></td>
+                            <td>奖励</td>
+                            <td><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></td>
+                            <td>技术进步</td>
+                            <td class="center">2017 04 05</td>
+                            <td class="center">叶振全</td>
+                            <td class="center"><a href="#" data-toggle="modal" data-target="#edit_rewardsModal"><i class="glyphicon glyphicon-edit"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" onclick="del_rewardsById()"><i class="glyphicon glyphicon-trash"></i></a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 全局js -->
+<script src="../../common/js/jquery.min.js?v=2.1.4"></script>
+<script src="../../common/js/bootstrap.min.js?v=3.3.6"></script>
+
+<script src="../../common/js/plugins/jeditable/jquery.jeditable.js"></script>
+<!--自定义js-->
+<script src="../../common/js/admin/rewardsmanager.js"></script>
+<!-- Data Tables -->
+<script src="../../common/js/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="../../common/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+<!--sweetalert-->
+<script src="../../common/js/plugins/sweetalert/sweetalert.min.js"></script>
+ <!-- jQuery Validation plugin javascript-->
+<script src="../../common/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="../../common/js/plugins/validate/messages_zh.min.js"></script>
+
+<!-- Page-Level Scripts -->
+<script>
+
+    $(document).ready(function () {
+       $('.dataTables-projectmanager').dataTable();
+
+    });
+    function fnClickAddRow() {
+        $('#editable').dataTable().fnAddData([
+            "Custom row",
+            "New row",
+            "New row",
+            "New row",
+            "New row"]);
+
+    }
+</script>
+</body>
+
+</html>

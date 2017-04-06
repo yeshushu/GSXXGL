@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.supren.dao.user.UserInfoMapper" >
+   
+	<sql id="tbuserInfoColumns">
+		a.id AS "id",
+		a.intst_time AS "intstTime",
+		a.birth AS "birth",
+		a.inaugural_unit AS "inauguralUnit",
+		a.password AS "password",
+		a.nation AS "nation",
+		a.teacher_number AS "teacherNumber",
+		a.name AS "name",
+		a.sex AS "sex",
+		a.user_name AS "userName",
+		a.user_role AS "userRole",
+		a.poli_outlook AS "poliOutlook",
+		a.job_title AS "jobTitle",
+		a.department_number AS "departmentNumber",
+		a.user_photos AS "userPhotos",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="tbuserInfoJoins">
+	</sql>
+    
+	<select id="get" parameterType="string" resultType="com.supren.domain.user.UserInfo">
+		SELECT 
+			<include refid="tbuserInfoColumns"/>
+		FROM tbuser_info a
+		<include refid="tbuserInfoJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" parameterType="com.supren.domain.user.UserInfo" resultType="com.supren.domain.user.UserInfo">
+		SELECT 
+			<include refid="tbuserInfoColumns"/>
+		FROM tbuser_info a
+		<include refid="tbuserInfoJoins"/>
+		<where>
+			<if test="id != null and id != ''">
+				AND a.ID = #{id}
+			</if>
+			<if test="intstTime != null and intstTime != ''">
+				AND a.INTST_TIME = #{intstTime}
+			</if>
+			<if test="password != null and password != ''">
+				AND a.PASSWORD = #{password}
+			</if>
+			<if test="nation != null and nation != ''">
+				AND a.NATION = #{nation}
+			</if>
+			<if test="teacherNumber != null and teacherNumber != ''">
+				AND a.TEACHER_NUMBER = #{teacherNumber}
+			</if>
+			<if test="sex != null and sex != ''">
+				AND a.SEX = #{sex}
+			</if>
+			<if test="userName != null and userName != ''">
+				AND a.USER_NAME = #{userName}
+			</if>
+			<if test="userRole != null and userRole != ''">
+				AND a.USER_ROLE = #{userRole}
+			</if>
+			<if test="poliOutlook != null and poliOutlook != ''">
+				AND a.POLI_OUTLOOK = #{poliOutlook}
+			</if>
+			<if test="departmentNumber != null and departmentNumber != ''">
+				AND a.DEPARTMENT_NUMBER = #{departmentNumber}
+			</if>
+			<if test="userPhotos != null and userPhotos != ''">
+				AND a.USERPHOTOS = #{userPhotos}
+			</if>
+			<if test="birth != null and birth != ''">
+				AND a.BIRTH = #{birth}
+			</if>
+			<if test="inauguralUnit != null and inauguralUnit != ''">
+				AND a.INAUGURAL_UNIT = #{inauguralUnit}
+			</if>
+			<if test="name != null and name != ''">
+				AND a.NAME LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+			<if test="jobTitle != null and jobTitle != ''">
+				AND a.JOB_TITLE = #{jobTitle}
+			</if>
+			<if test="departmentNumber != null and departmentNumber != ''">
+				AND a.DEPARTMENT_NUMBER = #{departmentNumber}
+			</if>
+		</where>
+	</select>
+	
+	<select id="findAllList" resultType="com.supren.domain.user.UserInfo">
+		SELECT 
+			<include refid="tbuserInfoColumns"/>
+		FROM tbuser_info a
+		<include refid="tbuserInfoJoins"/>
+		<where>
+			a.del_flag = '0'
+		</where>		
+	</select>
+	
+	<insert id="insert" parameterType="com.supren.domain.user.UserInfo">
+		INSERT INTO tbuser_info(
+			ID,
+			birth,
+			inaugural_unit,
+			password,
+			nation,
+			teacher_number,
+			name,
+			sex,
+			user_name,
+			user_role,
+			poli_outlook,
+			job_title,
+			department_number,
+			user_photos,
+			del_flag
+		) VALUES (
+			#{id},
+			#{birth},
+			#{inauguralUnit},
+			#{password},
+			#{nation},
+			#{teacherNumber},
+			#{name},
+			#{sex},
+			#{userName},
+			#{userRole},
+			#{poliOutlook},
+			#{jobTitle},
+			#{departmentNumber},
+			#{userPhotos},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.supren.domain.user.UserInfo">
+		UPDATE tbuser_info SET 	
+			birth = #{birth},
+			inaugural_unit = #{inauguralUnit},
+			password = #{password},
+			nation = #{nation},
+			teacher_number = #{teacherNumber},
+			name = #{name},
+			sex = #{sex},
+			user_name = #{userName},
+			user_role = #{userRole},
+			poli_outlook = #{poliOutlook},
+			job_title = #{jobTitle},
+			department_number = #{departmentNumber},
+			user_photos = #{userPhotos}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete" parameterType="string">
+		UPDATE tbuser_info SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+</mapper>

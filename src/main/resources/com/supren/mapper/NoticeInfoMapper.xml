@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.supren.dao.notice.NoticeInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.supren.domain.notice.NoticeInfo" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="ANN_CONTENT" property="annContent" jdbcType="VARCHAR" />
+    <result column="INTST_TIME" property="intstTime" jdbcType="TIMESTAMP" />
+    <result column="ANN_TITLE" property="annTitle" jdbcType="VARCHAR" />
+    <result column="DEL_FLAG" property="delFlag" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, ANN_CONTENT, INTST_TIME, ANN_TITLE, DEL_FLAG
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.supren.domain.notice.NoticeInfo" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tbnotice_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbnotice_info
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tbnotice_info
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.supren.domain.notice.NoticeInfo" >
+    delete from tbnotice_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.supren.domain.notice.NoticeInfo" >
+    insert into tbnotice_info (ID, ANN_CONTENT, INTST_TIME, 
+      ANN_TITLE, DEL_FLAG)
+    values (#{id,jdbcType=VARCHAR}, #{annContent,jdbcType=VARCHAR}, #{intstTime,jdbcType=TIMESTAMP}, 
+      #{annTitle,jdbcType=VARCHAR}, #{delFlag,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.supren.domain.notice.NoticeInfo" >
+    insert into tbnotice_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="annContent != null" >
+        ANN_CONTENT,
+      </if>
+      <if test="intstTime != null" >
+        INTST_TIME,
+      </if>
+      <if test="annTitle != null" >
+        ANN_TITLE,
+      </if>
+      <if test="delFlag != null" >
+        DEL_FLAG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="annContent != null" >
+        #{annContent,jdbcType=VARCHAR},
+      </if>
+      <if test="intstTime != null" >
+        #{intstTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="annTitle != null" >
+        #{annTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.supren.domain.notice.NoticeInfo" resultType="java.lang.Integer" >
+    select count(*) from tbnotice_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tbnotice_info
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.annContent != null" >
+        ANN_CONTENT = #{record.annContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.intstTime != null" >
+        INTST_TIME = #{record.intstTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.annTitle != null" >
+        ANN_TITLE = #{record.annTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null" >
+        DEL_FLAG = #{record.delFlag,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tbnotice_info
+    set ID = #{record.id,jdbcType=VARCHAR},
+      ANN_CONTENT = #{record.annContent,jdbcType=VARCHAR},
+      INTST_TIME = #{record.intstTime,jdbcType=TIMESTAMP},
+      ANN_TITLE = #{record.annTitle,jdbcType=VARCHAR},
+      DEL_FLAG = #{record.delFlag,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.supren.domain.notice.NoticeInfo" >
+    update tbnotice_info
+    <set >
+      <if test="annContent != null" >
+        ANN_CONTENT = #{annContent,jdbcType=VARCHAR},
+      </if>
+      <if test="intstTime != null" >
+        INTST_TIME = #{intstTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="annTitle != null" >
+        ANN_TITLE = #{annTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        DEL_FLAG = #{delFlag,jdbcType=CHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.supren.domain.notice.NoticeInfo" >
+    update tbnotice_info
+    set ANN_CONTENT = #{annContent,jdbcType=VARCHAR},
+      INTST_TIME = #{intstTime,jdbcType=TIMESTAMP},
+      ANN_TITLE = #{annTitle,jdbcType=VARCHAR},
+      DEL_FLAG = #{delFlag,jdbcType=CHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.supren.domain.User;
+import com.supren.domain.user.UserInfo;
 import com.supren.utils.MessageUtils;
 import com.supren.utils.ResponseUtils;
 /**
@@ -29,8 +29,8 @@ public class LoginInterceptor implements HandlerInterceptor{
 		logger.info("uri:"+uri);
 		
 		HttpSession session = request.getSession();
-		User User = (User) session.getAttribute("User");
-		if(User != null){
+		UserInfo userInfo = (UserInfo) session.getAttribute("User");
+		if(userInfo != null){
 			return true;
 		}else{
 			ResponseUtils.write(response,MessageUtils.genJsonMesg(301));

@@ -11,7 +11,7 @@
 		</commentGenerator>
 		
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver" 
-						connectionURL="jdbc:mysql://localhost:3306/myproject" 
+						connectionURL="jdbc:mysql://localhost:3306/jsxxgl" 
 						userId="root" 
 						password="416909"/>
 		
@@ -19,7 +19,7 @@
 			<property name="forceBigDecimals" value="false"/>
 		</javaTypeResolver>
 		<!-- 资源包配置  其中路径为相对路径 -->
-		<javaModelGenerator targetPackage="com.supren.domain" targetProject="myproject\src\main\java">
+		<javaModelGenerator targetPackage="com.supren.domain.notice" targetProject="myproject\src\main\java">
 			<property name="enableSubPackages" value="true"/>
 			<property name="trimStrings" value="true"/>
 		</javaModelGenerator>
@@ -28,11 +28,16 @@
 			<property name="enableSubPackages" value="true"/>
 		</sqlMapGenerator>
 		
-		<javaClientGenerator type="XMLMAPPER" targetPackage="com.supren.dao" targetProject="myproject\src\main\java">
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.supren.dao.notice" targetProject="myproject\src\main\java">
 			<property name="enableSubPackages" value="true"/>
 		</javaClientGenerator>
 		<!-- 表与mapper映射关系 -->
-		<table tableName="t_user" domainObjectName="User" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+		<table tableName="tbNotice_Info" domainObjectName="NoticeInfo" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+	<!-- 	<table tableName="tbuser_info" domainObjectName="UserInfo" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+		<table tableName="tbuser_info" domainObjectName="UserInfo" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+		<table tableName="tbuser_info" domainObjectName="UserInfo" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+		<table tableName="tbuser_info" domainObjectName="UserInfo" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+		<table tableName="tbuser_info" domainObjectName="UserInfo" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table> -->
 <!-- 		<table tableName="sys_roles" domainObjectName="Role" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
 		<table tableName="sys_resources" domainObjectName="Resources" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
 		<table tableName="sys_roles_resources" domainObjectName="RoleResource" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
